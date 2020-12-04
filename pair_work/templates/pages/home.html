@@ -1,0 +1,72 @@
+{% extends 'index.html'%} {% block content %} {% load static %}
+<div class="content home">
+  <header>
+    <h1 class="display-1">PairWork</h1>
+    <a href="in_" class="btn btn-outline-success btn-lg c-light">Start Now</a>
+  </header>
+  <main>
+    <section class="how">
+      <h1 class="text-center display-4">How To Use</h1>
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="">
+          <h2>Register Your Account</h2>
+        </div>
+        <div class="image">
+          <img class="img-fluid" src="{% static 'images/account.jpeg'%}"/>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="">
+          <h2>Register Your Work</h2>
+        </div>
+        <div class="image">
+          <img class="img-fluid" src="{% static 'images/reg-work.jpeg'%}"/>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="">
+          <h2>Check Your Work</h2>
+        </div>
+        <div class="image">
+          <img class="img-fluid" src="{% static 'images/check.jpeg'%}"/>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="">
+          <h2>Check Your Friends</h2>
+        </div>
+        <div class="image">
+          <img class="img-fluid" src="{% static 'images/friends.jpeg'%}"/>
+        </div>
+      </div>
+    </section>
+    <section class="li">
+      <h1 class="display-4 text-center">Features</h1>
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="">
+          <h2>Upward compatible for ToDo lists</h2>
+          <p>You can register your work and check you done.</p>
+        </div>
+        <div class="image">
+          <img class="img-fluid" src="{% static 'images/hierachy.jpeg'%}"/>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="">
+          <h2>Make Friends Who Do What You Like</h2>
+          <p>You can see all users.<br> 
+          ofcourse, you can see who yo follow.
+          but also, you can see
+          </p>
+        </div>
+        <div class="image">
+          <img class="img-fluid" src="{% static 'images/friend.jpeg'%}"/>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <a href="">TOP</a>
+  </footer>
+</div>
+{% endblock %}
