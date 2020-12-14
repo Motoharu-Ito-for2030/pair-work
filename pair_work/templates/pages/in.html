@@ -1,18 +1,22 @@
 {% extends 'index.html' %} {% block content %} {% load static %}
 <div class="content login">
-  <header>
-    <a href="home"><img src="{% static 'images/.png' %}" class="logo"></a>
-  </header>
-  <main>
-    <form action="{%url 'process_form_user'%}" method="post">
-      {% csrf_token %}
-      <h1>Sign Up</h1>
-      <input type="text" placeholder="name" name="name">
-      <input type="text" placeholder="Email" name="email">
-      <input type="text" placeholder="Password" name="password">      
-      <input type="text" placeholder="Confirm Password" name="con_password">
-      <button type="submit">Sign Up</button>
-    </form>
-  </main>
+  <!-- Header -->
+  <header class="masthead d-flex">
+    
+    <div class="container text-center my-auto">
+      <form action="{%url 'process_form_user' %}" method="post">
+        {% csrf_token %}
+        <h1>Make Your Account</h1>
+        <input type="text" placeholder="name" name="name">
+        <input type="text" placeholder="Email" name="email" >
+        <input type="text" placeholder="Password" name="password">      
+        <input type="text" placeholder="Confirm Password" name="con_password">
+        <button class="btn btn-primary btn-xl js-scroll-trigger"type="submit">Sign Up</button>
+      </form>
+      <p>or</p>
+      <a class="btn btn-secondary btn-xl js-scroll-trigger" href="{%url 'login' %}">Log In</a> 
+    </div>
+    <div class="overlay"></div>
 </div>
+  </header>
 {% endblock %}

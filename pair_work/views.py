@@ -1,67 +1,106 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import User, Work
+from urllib.parse import urlencode
+from datetime import datetime
 # Create your views here.
 
 
 def pairwork(request):
+  
   return render(request, 'index.html')
 
 def home(request):
   return render(request, 'pages/home.html')
 
-def postwork(request):
-  return render(request, 'pages/postwork.html')
+def login(request):
+  return render(request, 'pages/login.html')
+
+def postwork(request, id):
+  the_user = User.objects.get(id= id)
+  user_name = the_user.name
+  user_email = the_user.email
+  data = {
+      'user_id': id,
+      'name': user_name,
+  }
+  return render(request, 'pages/postwork.html', data)
+
 
 def process_form_user(request):
   if request.POST.get('name'):
-    name = request.POST['name']
-    email = request.POST['email']
-    password = request.POST['password']
-    con_password = request.POST['con_password']
+      name = request.POST['name']
+      email = request.POST['email']
+      password = request.POST['password']
+      con_password = request.POST['con_password']
 
-    if name.strip() == '' or email.strip() == '' or password.strip() == '':
-        return render(request, 'pages/error.html')
-    if con_password != password:
-            print('<script>window.alert("error");</script>')
-            return render(request, 'pages/error.html')
+      if name.strip() == '' or email.strip() == '':
+          print('<script>window.alert("error 1");</script>')
+          return render(request, 'pages/error.html')
 
-    if User.objects.filter(email=email).exists():
-        # email already registered
-        return render(request, 'pages/error.html')
-    new_user = User(name=name, email=email, password=password)
-    new_user.save()
-    
+      if con_password != password:
+          print('<script>window.alert("error");</script>')
+          return render(request, 'pages/error.html')
+
+      if User.objects.filter(email=email).exists():
+          # email already registered
+          return render(request, 'pages/error.html')
+
+      new_user = User(name=name, email=email, password=password)
+      new_user.save()
   else:
-    email = request.POST['email']
-    password = request.POST['password']
-    # user_info = user.objects.values()
-
-    if User.objects.filter(email=email).exists() and User.objects.filter(password=password).exists():
+      email = request.POST['email']
+      password = request.POST['password']
+      # user_info = user.objects.values()
+      
+      if User.objects.filter(email=email).exists() and User.objects.filter(password=password).exists():
       # sign in
-        pass
-    else:
-        return render(request, 'pages/in.html')
-    
+          pass
+      else:
+          return render(request, 'pages/error.html')
   
-  me = User.objects.get(email=email)
-  user_id = me.id
-  user_name = me.name
-  user_email = me.email
+  
+  the_user = User.objects.get(email=email)
+  return redirect(the_user)
+
+def process_form_work(request):
+  name = request.POST['name']
+  text = request.POST['text']
+  user_id = request.POST['user_id']
+  dateTime = datetime.now()
+  
+  if name.strip() == '' or text.strip() == '':
+      print('<script>window.alert("error 1");</script>')
+      return render(request, 'pages/error.html')
+  if user_id == None:
+    return render(request, 'pages/error.html')
+
+  if Work.objects.filter(text=text).exists():
+      # text already registered
+      return render(request, 'pages/error.html')
+
+  new_work= Work(user_id=user_id, name=name, text=text, created_at=dateTime)
+  new_work.save()
+  
+  
+  the_user= User.objects.get(id=user_id)
+  return redirect(the_user)
+
+
+
+def mywork(request, id):
+  the_works = Work.objects.filter(user_id=id)
+  the_user = User.objects.get(id=id)
+  user_name = the_user.name
+  user_email = the_user.email
   data = {
-      'id': user_id,
+      'user_id': id,
       'email': user_email,
       'name': user_name,
+      'works': the_works
   }
-  
-  def mywork(request):
-    response = redirect('mywork')
-    get_params = request.GET.urlencode()
-    response['location'] += '?'+get_params
-    return response
-  
-  return mywork(request)
+  return render(request, 'pages/mywork.html', data)
 
     
     
