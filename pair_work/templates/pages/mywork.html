@@ -1,10 +1,35 @@
 {% extends 'index.html'%} {% block content %} {% load static %}
-<div class="content">
-  <header>
-   <p>Mywork だよ</p>
+<div class="content mywork">
+  <header class="masthead d-flex">
+    <a href="{%url 'home' %}"class="btn btn-primary btn-xl js-scroll-trigger">Home</a>
+    <div class="container text-center my-auto">
+      <h1 class="mb-5">Welcome to <br><i>Pair Work</i> </h1>
+      <a class="btn btn-primary btn-xl js-scroll-trigger" href="{%url 'postwork' user_id%}">Register Pastime</a>
+    </div>
+    <div class="overlay"></div>
+    {% if works %}
+
+    {% endif%}
   </header>
-  <main>
-      
-  </main>
+  <section class="content-section bg-primary text-white text-center" id="list">
+    <h1 class="mb-5 text-black">「{{name}}」さんのPastime</h1>
+    {%for work in works %}
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1>{{work.name}}</h1>
+        </div>
+        <div class="col">
+          <p>{{work.text}}</p>
+          <p>登録日：{{work.created_at}}</p>
+        </div>
+        <div class="col-1">
+          <button class="d-block btn btn-primary rounded-circle" onClick="">x</button>
+        </div>
+      </div>
+      <hr>
+    </div>
+    {% endfor %}
+  </section>
 </div>
 {% endblock %}
