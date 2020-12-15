@@ -87,7 +87,9 @@ def process_form_work(request):
   the_user= User.objects.get(id=user_id)
   return redirect(the_user)
 
-
+def redirect_user(request, id):
+  the_user = User.objects.get(id=id)
+  return redirect(the_user)
 
 def mywork(request, id):
   the_works = Work.objects.filter(user_id=id)
@@ -108,8 +110,13 @@ def mywork(request, id):
 def detail(request):
   return render(request, 'pages/detail.html')
 
-def users(request):
-  return render(request, 'pages/users.html')
+def users(request, user_id):
+  all_users = User.objects.all().values()
+  data = {
+      'user_id': id,
+      'users': all_users,
+  }
+  return render(request, 'pages/users.html', data)
 
 def in_(request):
   return render(request, 'pages/in.html')

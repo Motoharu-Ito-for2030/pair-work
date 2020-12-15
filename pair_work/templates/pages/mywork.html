@@ -1,14 +1,15 @@
 {% extends 'index.html'%} {% block content %} {% load static %}
 <div class="content mywork">
   <header class="masthead d-flex">
-    <a href="{%url 'home' %}"class="btn btn-primary btn-xl js-scroll-trigger">Home</a>
+    <a href="{%url 'home' %}"class="btn btn-primary btn-xl js-scroll-trigger mr-5">Home</a>
+    <a href="{%url 'users' user_id%}"class="btn btn-primary btn-xl js-scroll-trigger">Users</a>
     <div class="container text-center my-auto">
       <h1 class="mb-5">Welcome to <br><i>Pair Work</i> </h1>
       <a class="btn btn-primary btn-xl js-scroll-trigger" href="{%url 'postwork' user_id%}">Register Pastime</a>
     </div>
     <div class="overlay"></div>
     {% if works %}
-
+      <p>Yeahhhhhh</p>
     {% endif%}
   </header>
   <section class="content-section bg-primary text-white text-center" id="list">
