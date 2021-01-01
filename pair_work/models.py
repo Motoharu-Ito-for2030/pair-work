@@ -17,9 +17,17 @@ class Work(models.Model):
   name = models.CharField(max_length=60)
   text = models.CharField(max_length=280)
   created_at = models.DateTimeField('created_at')
+  will_reach_at = models.DateTimeField('will_reach_at', null=True)
   
   def get_absolute_url(self):
-    return reverse("myownwork", kwargs={'id': self.user_id})
+    return reverse("detail", kwargs={'user_id': self.user_id, 'id': self.id})
+  
+
+class Goal(models.Model):
+  work_id = models.PositiveSmallIntegerField(blank=True, null=True, default=0)
+  month_id = models.PositiveSmallIntegerField(blank=True, null=True, default=0)
+  goal = models.CharField(max_length=280, null=True)
+  is_end = models.BooleanField(default=False)
   
 
 

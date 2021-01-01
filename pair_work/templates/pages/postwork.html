@@ -4,9 +4,10 @@
     <div class="container text-center my-auto">
       <form action="{%url 'process_form_work'%}" method="post">
         {% csrf_token %}
-        <h1>Add your work</h1>
-        <input type="text" placeholder="name" name="name"/>
-        <input type="text" placeholder="text" name="text"/>
+        <h1>Add Your Pastime</h1>
+        <label>Target:<input type="text" placeholder="name" name="name"/></label>
+        <label>Text:<input type="text" placeholder="text" name="text"/></label>
+        <label>Deadline:<input type="date" placeholder="will_reach_at" name="will_reach_at"/></label>
         <input class="invisible" type="text"  value={{user_id}} name="user_id"/>
         <button class="btn btn-primary btn-xl js-scroll-trigger"type="submit">Add Pastime</button>
       </form>

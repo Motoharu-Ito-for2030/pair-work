@@ -1,10 +1,46 @@
 {% extends 'index.html'%} {% block content %} {% load static %}
 <div class="content">
   <header>
-   
+    <h1>{{detail.name}}</h1>
+    <h2>{{detail.text}}</h2>
+    <p>Created_at:{{created_at}}</p>
+    <p>will_reach_at at:{{will_reach_at}}</p>
   </header>
   <main>
-      
+  <form action="{%url 'post_goal'%}" method="POST">
+    {% csrf_token %}
+    <button class="btn"type="submit">submit</button>
+    <input class="invisible" value="{{months}}"name="months">
+    <input class="invisible" value="{{detail.id}}"name="work_id">
+    {%for m in months%}
+      {%if m == 0%}
+        <h1>Goal in this month</h1>
+        <input name="goal">
+        {%for i in the_goals%}
+          {%if m == i.month_id%}
+            <p>{{i.goal}}<span class="ml-5">x</span></p>
+          {%endif%}
+        {%endfor%}
+      {%elif m == 1%}
+        <h1>Goal in 1 month</h1>
+        <input name="goal">
+        {%for i in the_goals%}
+          {%if m == i.month_id%}
+            <p>{{i.goal}}<span class="ml-5">x</span></p>
+          {%endif%}
+        {%endfor%}
+      {%else%}
+        <h1>Goal in {{m}} months</h1>
+        <input name="goal">
+        {%for i in the_goals%}
+          {%if m == i.month_id%}
+            <p>{{i.goal}}<span class="ml-5">x</span></p>
+          {%endif%}
+        {%endfor%}
+      {%endif%}
+    {%endfor%}
+    
+  </form>
   </main>
 </div>
 {% endblock %}
