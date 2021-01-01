@@ -1,35 +1,40 @@
 {% extends 'index.html'%} {% block content %} {% load static %}
 <div class="content mywork">
-  <header class="masthead d-flex">
+  <header class="masthead">
     <a href="{%url 'home' %}"class="btn btn-primary btn-xl js-scroll-trigger mr-5">Home</a>
     <a href="{%url 'users' user_id%}"class="btn btn-primary btn-xl js-scroll-trigger">Users</a>
-    <div class="container text-center my-auto">
+    <div class="container text-center my-auto pt-5">
       <h1 class="mb-5">Welcome to <br><i>Pair Work</i> </h1>
       <a class="btn btn-primary btn-xl js-scroll-trigger" href="{%url 'postwork' user_id%}">Register Pastime</a>
     </div>
     <div class="overlay"></div>
-    {% if works %}
-      <p>Yeahhhhhh</p>
-    {% endif%}
   </header>
   <section class="content-section bg-primary text-white text-center" id="list">
     <h1 class="mb-5 text-black">「{{name}}」さんのPastime</h1>
     {%for work in works %}
+    <a class="text-white text-decoration-none"href="{%url 'detail' user_id work.id%}">
     <div class="container">
+    
       <div class="row">
         <div class="col">
           <h1>{{work.name}}</h1>
         </div>
         <div class="col">
           <p>{{work.text}}</p>
-          <p>登録日：{{work.created_at}}</p>
+          <p>登録日：{{work.created_at.date}}</p>
         </div>
         <div class="col-1">
-          <button class="d-block btn btn-primary rounded-circle" onClick="">x</button>
+        <form action="{%url 'delete'%}" method="post">
+          {% csrf_token %}
+          <input value={{work.name}} class="invisible" name="name">
+          <input value={{work.user_id}} class="invisible" name="user_id">
+          <button class="d-block btn btn-primary rounded-circle" type="submit">x</button>
+        </form>
         </div>
       </div>
       <hr>
     </div>
+    </a>
     {% endfor %}
   </section>
 </div>
