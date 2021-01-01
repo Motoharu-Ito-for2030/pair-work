@@ -2,7 +2,7 @@
 
 - My first web application
 - Version 1.0: only want-to-do lists.
-
+- Version 2.0: each to-do detail page and monthly goal functionality added.
 ## What is Pair Work?
 - the application to share our want-to-do
 
@@ -17,6 +17,7 @@
 初めてのwebアプリケーション制作
 
 Version 1.0:　ただの「やりたいことリスト」
+Version 2.0:　やりたいことの詳細ページと月別目標の設定ができるようになりました。
 
 ## Pair Workとは
 - やりたいことを共有することができるアプリケーション
