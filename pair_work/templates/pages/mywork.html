@@ -28,6 +28,7 @@
           {% csrf_token %}
           <input value={{work.name}} class="invisible" name="name">
           <input value={{work.user_id}} class="invisible" name="user_id">
+          <input value={{work.id}} class="invisible" name="work_id">
           <button class="d-block btn btn-primary rounded-circle" type="submit">x</button>
         </form>
         </div>

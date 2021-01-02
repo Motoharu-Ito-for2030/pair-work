@@ -11,7 +11,7 @@ import calendar
 
 def pairwork(request):
   
-  return render(request, 'index.html')
+  return render(request, 'pages/top.html')
 
 def home(request):
   return render(request, 'pages/home.html')
@@ -70,7 +70,7 @@ def process_form_work(request):
   name = request.POST['name']
   text = request.POST['text']
   user_id = request.POST['user_id']
-  will_reach_at = request.POST['will_reach_at']
+  deadline = request.POST['deadline']
   dateTime = datetime.now()
   
   if name.strip() == '' or text.strip() == '':
@@ -80,7 +80,7 @@ def process_form_work(request):
     return render(request, 'pages/error.html')
 
 
-  new_work= Work(user_id=user_id, name=name, text=text, created_at=dateTime,will_reach_at=will_reach_at)
+  new_work= Work(user_id=user_id, name=name, text=text, created_at=dateTime,deadline=deadline)
   new_work.save()
   
   
@@ -109,9 +109,9 @@ def mywork(request, id):
 
 def detail(request, user_id,id):
   the_detail = Work.objects.get(id=id)
-  the_goals = Goal.objects.filter(work_id=id)
+  the_goals = Goal.objects.filter(work_id=id, is_end=0)
   dt1 = the_detail.created_at
-  dt2 = the_detail.will_reach_at
+  dt2 = the_detail.deadline
   # ２つの日付の差を、月単位/年単位で求める -----------
   # (monthdelta(20), datetime.timedelta(days=25)) <-タプル（リストみたいなもん）
   mmod = monthmod(dt1, dt2)
@@ -122,14 +122,14 @@ def detail(request, user_id,id):
   ## 年数差（余りは切り捨て）月数差を12で割ります。月の日数は色々ですが、年の月数は常に12なのでこれでok
   years = mmod[0].months//12  # 1
   created_at = the_detail.created_at. strftime ( '%Y年%m月%d日' ) 
-  will_reach_at = the_detail.will_reach_at. strftime ( '%Y年%m月%d日' ) 
+  deadline = the_detail.deadline. strftime ( '%Y年%m月%d日' ) 
   data = {
       'user_id': user_id,
       'detail': the_detail,
       'months': range(months),
       'years': years,
       'created_at': created_at,
-      'will_reach_at': will_reach_at,
+      'deadline': deadline,
       'the_goals': the_goals,
   }
   return render(request, 'pages/detail.html', data)
@@ -148,8 +148,14 @@ def in_(request):
 def delete(request):
   name = request.POST['name']
   user_id = request.POST['user_id']
-  the_pastime = Work.objects.get(name=name,user_id=user_id)
+  work_id = request.POST['work_id']
+  the_pastime = Work.objects.get(id=work_id)
   the_pastime.delete()
+  try:
+    the_goal = Goal.objects.get(work_id=work_id)
+    the_goal.delete()
+  except:
+    pass
   the_user = User.objects.get(id=user_id)
   return redirect(the_user)
 
@@ -158,6 +164,14 @@ def post_goal(request):
   months = request.POST['months']
   work_id = request.POST['work_id']
   goals = request.POST.getlist('goal')
+  
+  if request.POST.getlist('end'):
+    ends = request.POST.getlist('end')
+    for i in ends:
+      print(i)
+      e = Goal.objects.get(id=i, is_end=0)
+      e.is_end  = 1
+      e.save()
   for index, i in enumerate(goals):
     if i != '':
       month_id = index
