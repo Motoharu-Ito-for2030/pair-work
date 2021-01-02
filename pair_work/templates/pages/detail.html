@@ -1,10 +1,10 @@
 {% extends 'index.html'%} {% block content %} {% load static %}
-<div class="content">
+<div class="content container" id="detail">
   <header>
     <h1>{{detail.name}}</h1>
     <h2>{{detail.text}}</h2>
-    <p>Created_at:{{created_at}}</p>
-    <p>will_reach_at at:{{will_reach_at}}</p>
+    <p>Departure:{{created_at}}</p>
+    <p>Deadline:{{deadline}}</p>
   </header>
   <main>
   <form action="{%url 'post_goal'%}" method="POST">
@@ -18,7 +18,10 @@
         <input name="goal">
         {%for i in the_goals%}
           {%if m == i.month_id%}
-            <p>{{i.goal}}<span class="ml-5">x</span></p>
+            <div>
+              <input type="checkbox" id="goal" name="end" value="{{i.id}}">
+              <label for="goal">{{i.goal}}</label>
+            </div>
           {%endif%}
         {%endfor%}
       {%elif m == 1%}
@@ -26,7 +29,10 @@
         <input name="goal">
         {%for i in the_goals%}
           {%if m == i.month_id%}
-            <p>{{i.goal}}<span class="ml-5">x</span></p>
+            <div>
+              <input type="checkbox" id="end_goal" name="end" value="{{i.id}}">
+              <label for="end_goal">{{i.goal}}</label>
+            </div>
           {%endif%}
         {%endfor%}
       {%else%}
@@ -34,7 +40,10 @@
         <input name="goal">
         {%for i in the_goals%}
           {%if m == i.month_id%}
-            <p>{{i.goal}}<span class="ml-5">x</span></p>
+           <div>
+              <input type="checkbox" id="end_goal" name="end" value="{{i.id}}">
+              <label for="end_goal">{{i.goal}}</label>
+            </div>
           {%endif%}
         {%endfor%}
       {%endif%}

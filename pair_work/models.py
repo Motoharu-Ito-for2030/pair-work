@@ -17,7 +17,7 @@ class Work(models.Model):
   name = models.CharField(max_length=60)
   text = models.CharField(max_length=280)
   created_at = models.DateTimeField('created_at')
-  will_reach_at = models.DateTimeField('will_reach_at', null=True)
+  deadline = models.DateTimeField('deadline', null=True)
   
   def get_absolute_url(self):
     return reverse("detail", kwargs={'user_id': self.user_id, 'id': self.id})
