@@ -1,3 +1,121 @@
-#detail header{
-  color:black;
+/* mywork page */
+#each_work {
+  color: white;
+  transition-duration: .8s;
+  border-radius: 16px;
+}
+#each_work:hover{
+  color: #1d809f;
+  background-color: white;
+  transform: translate(0px, -20px);
+}
+/* detail */
+#detail {
+  background-color: #3cad7e;
+  color: #fff;
+  font-family: 'Amatic SC', cursive;
+}
+.header {
+  width: 100%;
+  font-family: "Times New Roman", "游明朝", "Yu Mincho", "游明朝体", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "HiraMinProN-W3", "HGS明朝E", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+  position: relative;
+  margin-bottom: 25vh;
+}
+
+  .header header{
+    height: 50vh;
+    position: absolute;
+    z-index: 10200;
+    width: 100%;
+  }
+
+    .header header a {
+        text-decoration: none;
+        position: absolute;
+        background-color: #3cad7e;
+        top:5%;
+        left:2%;
+
+      }
+    .header header h1 {
+        position: absolute;
+        color: black;
+        font-family: 'Amatic SC', cursive;
+        right: 20%;
+      }
+    .header header h2 {
+        position: absolute;
+        color: black;
+        font-family: 'Amatic SC', cursive;
+        top: 11%;
+        right: 26%;
+      }
+    .header header p {
+        color: black;
+        font-size: 60px;
+        position: absolute;
+        top: 73%;
+        left: 25%;
+      }
+  .header .background{
+    position: relative;
+    height: 50vh;
+    z-index: 100;
+  }
+    .header .background img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: auto;
+      height: auto;
+      min-width: 100%;
+      min-height: 100%;
+      max-width: inherit;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+
+.nice-wrap{
+  position: relative;
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  margin-top: 30px;
+}
+
+.nice-label{
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-size: 25px;
+  color: #a0a0a0;
+  transition: all 0.25s ease;
+}
+.nice-label.focus{
+  top: -30px;
+  left: 5px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.nice-textbox{
+  height: 40px;
+  width: 100%;
+  position: relative;
+  display: block;
+  padding: none;
+  border: 1px solid black;
+  border-radius: 4px;
+  color: black;
+  outline: none;
+}
+#detail form h1 {
+  color: black;
+  text-align: center;
+}
+
+#detail form div label {
+  font-size: 24px;
 }

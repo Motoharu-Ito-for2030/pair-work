@@ -110,6 +110,7 @@ def mywork(request, id):
 def detail(request, user_id,id):
   the_detail = Work.objects.get(id=id)
   the_goals = Goal.objects.filter(work_id=id, is_end=0)
+  today = date.today(). strftime('%Y/%m/%d')
   dt1 = the_detail.created_at
   dt2 = the_detail.deadline
   # ２つの日付の差を、月単位/年単位で求める -----------
@@ -121,14 +122,15 @@ def detail(request, user_id,id):
 
   ## 年数差（余りは切り捨て）月数差を12で割ります。月の日数は色々ですが、年の月数は常に12なのでこれでok
   years = mmod[0].months//12  # 1
-  created_at = the_detail.created_at. strftime ( '%Y年%m月%d日' ) 
-  deadline = the_detail.deadline. strftime ( '%Y年%m月%d日' ) 
+  created_at = the_detail.created_at. strftime ( '%Y/%m/%d' ) 
+  deadline = the_detail.deadline. strftime ( '%Y/%m/%d' ) 
   data = {
       'user_id': user_id,
       'detail': the_detail,
       'months': range(months),
       'years': years,
       'created_at': created_at,
+      'today': today,
       'deadline': deadline,
       'the_goals': the_goals,
   }

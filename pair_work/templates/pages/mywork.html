@@ -1,8 +1,9 @@
 {% extends 'index.html'%} {% block content %} {% load static %}
-<div class="content mywork">
+<div class="content" id="mywork">
   <header class="masthead">
     <a href="{%url 'home' %}"class="btn btn-primary btn-xl js-scroll-trigger mr-5">Home</a>
-    <a href="{%url 'users' user_id%}"class="btn btn-primary btn-xl js-scroll-trigger">Users</a>
+    <a href="{%url 'users' user_id%}"class="btn btn-primary btn-xl js-scroll-trigger mr-5">Users</a>
+    <a href="{%url 'login'%}"class="btn btn-primary btn-xl js-scroll-trigger">Log Out</a>
     <div class="container text-center my-auto pt-5">
       <h1 class="mb-5">Welcome to <br><i>Pair Work</i> </h1>
       <a class="btn btn-primary btn-xl js-scroll-trigger" href="{%url 'postwork' user_id%}">Register Pastime</a>
@@ -10,12 +11,12 @@
     <div class="overlay"></div>
   </header>
   <section class="content-section bg-primary text-white text-center" id="list">
-    <h1 class="mb-5 text-black">「{{name}}」さんのPastime</h1>
+    <h1 class="mb-5 text-black">「{{name}}」さんのWork</h1>
     {%for work in works %}
     <a class="text-white text-decoration-none"href="{%url 'detail' user_id work.id%}">
     <div class="container">
     
-      <div class="row">
+      <div class="row align-items-center" id="each_work">
         <div class="col">
           <h1>{{work.name}}</h1>
         </div>
@@ -24,16 +25,15 @@
           <p>登録日：{{work.created_at.date}}</p>
         </div>
         <div class="col-1">
-        <form action="{%url 'delete'%}" method="post">
-          {% csrf_token %}
-          <input value={{work.name}} class="invisible" name="name">
-          <input value={{work.user_id}} class="invisible" name="user_id">
-          <input value={{work.id}} class="invisible" name="work_id">
-          <button class="d-block btn btn-primary rounded-circle" type="submit">x</button>
-        </form>
+          <form action="{%url 'delete'%}" method="post">
+            {% csrf_token %}
+            <input value={{work.name}} class="invisible" name="name">
+            <input value={{work.user_id}} class="invisible" name="user_id">
+            <input value={{work.id}} class="invisible" name="work_id">
+            <button class="d-block btn btn-primary rounded-circle mb-3" type="submit">x</button>
+          </form>
         </div>
       </div>
-      <hr>
     </div>
     </a>
     {% endfor %}
