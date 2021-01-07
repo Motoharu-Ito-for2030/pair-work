@@ -4,6 +4,7 @@
 - Version 1.0: only want-to-do lists.
 - Version 2.0: each to-do detail page and monthly goal functionality added
 - Version 2.1: Checkbox to delete done added
+- Version 2.4: Detail Page CSS updated
 ## What is Pair Work?
 - the application to share our want-to-do
 
@@ -20,7 +21,7 @@
 - Version 1.0:　ただの「やりたいことリスト」
 - Version 2.0:　やりたいことの詳細ページと月別目標の設定ができるようになりました。
 - Version 2.1: チェックボックスを追加して終えた項目を非表示にすることができるようになりました。
-
+- Version 2.4: 詳細ページのCSSを更新しました。
 ## Pair Workとは
 - やりたいことを共有することができるアプリケーション
 - 「なりたい自分になるため」の時間をマネジメントするだけでなくそれをフレンドと共有することで、フレンドと切磋琢磨することができるアプリ
