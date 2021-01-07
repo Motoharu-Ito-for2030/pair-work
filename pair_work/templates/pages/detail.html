@@ -1,55 +1,80 @@
 {% extends 'index.html'%} {% block content %} {% load static %}
-<div class="content container" id="detail">
-  <header>
-    <h1>{{detail.name}}</h1>
-    <h2>{{detail.text}}</h2>
-    <p>Departure:{{created_at}}</p>
-    <p>Deadline:{{deadline}}</p>
-  </header>
-  <main>
-  <form action="{%url 'post_goal'%}" method="POST">
-    {% csrf_token %}
-    <button class="btn"type="submit">submit</button>
-    <input class="invisible" value="{{months}}"name="months">
-    <input class="invisible" value="{{detail.id}}"name="work_id">
-    {%for m in months%}
-      {%if m == 0%}
-        <h1>Goal in this month</h1>
-        <input name="goal">
-        {%for i in the_goals%}
-          {%if m == i.month_id%}
-            <div>
-              <input type="checkbox" id="goal" name="end" value="{{i.id}}">
-              <label for="goal">{{i.goal}}</label>
-            </div>
-          {%endif%}
-        {%endfor%}
-      {%elif m == 1%}
-        <h1>Goal in 1 month</h1>
-        <input name="goal">
-        {%for i in the_goals%}
-          {%if m == i.month_id%}
-            <div>
-              <input type="checkbox" id="end_goal" name="end" value="{{i.id}}">
-              <label for="end_goal">{{i.goal}}</label>
-            </div>
-          {%endif%}
-        {%endfor%}
-      {%else%}
-        <h1>Goal in {{m}} months</h1>
-        <input name="goal">
-        {%for i in the_goals%}
-          {%if m == i.month_id%}
-           <div>
-              <input type="checkbox" id="end_goal" name="end" value="{{i.id}}">
-              <label for="end_goal">{{i.goal}}</label>
-            </div>
-          {%endif%}
-        {%endfor%}
-      {%endif%}
-    {%endfor%}
+<div class="content" id="detail">
+  <div class="header">
+    <header>
+      <a href="{%url 'redirect_user' user_id%}" class="back btn">＜</a>
+      <h1>『{{detail.name}}』</h1>
+      <h2>{{detail.text}}</h2>
+      <p>{{today}}</p>
+    </header>
+    {%if today == created_at%}
+      <div class="background">
+        <img src="{% static 'img/firststep.jpg'%}">
+      </div>
+    {%elif today == deadline%}
     
-  </form>
+      <div class="background">
+        <img src="{% static 'img/finalstep.jpg'%}">        
+      </div>
+    {%else%}
+      <div class="background">
+        <img src="{% static 'img/continued.jpg' %}">
+      </div>
+    {%endif%}
+  </div>
+  <main class="container">
+    <form action="{%url 'post_goal'%}" method="POST" autocomplete="off">
+      {% csrf_token %}
+      <button class="btn btn-default"type="submit">Set Goal</button>
+      <input class="invisible" value="{{months}}"name="months">
+      <input class="invisible" value="{{detail.id}}"name="work_id">
+      {%for m in months%}
+        {%if m == 0%}
+          <h1>Goal in this month</h1>
+          {%for i in the_goals%}
+            {%if m == i.month_id%}
+              <div>
+                <input  type="checkbox" id="goal" name="end" value="{{i.id}}">
+                <label  for="goal">{{i.goal}}</label>
+              </div>
+            {%endif%}
+          {%endfor%}
+          <div class="nice-wrap">
+            <input class="nice-textbox" type="text" name="goal"/>
+            <label class="nice-label 0" for="Username">Goal in this month</label>
+          </div>
+        {%elif m == 1%}
+          <h1>Goal in 1 month</h1>
+          {%for i in the_goals%}
+            {%if m == i.month_id%}
+              <div>
+                <input type="checkbox" id="end_goal" name="end" value="{{i.id}}">
+                <label for="end_goal">{{i.goal}}</label>
+              </div>
+            {%endif%}
+          {%endfor%}
+          <div class="nice-wrap">
+            <input class="nice-textbox" type="text" name="goal"/>
+            <label class="nice-label" for="Username">Goal in 1 month</label>
+          </div>
+        {%else%}
+          <h1>Goal in {{m}} months</h1>
+          {%for i in the_goals%}
+            {%if m == i.month_id%}
+            <div>
+                <input type="checkbox" id="end_goal" name="end" value="{{i.id}}">
+                <label for="end_goal">{{i.goal}}</label>
+              </div>
+            {%endif%}
+          {%endfor%}
+          <div class="nice-wrap">
+            <input class="nice-textbox" type="text" name="goal"/>
+            <label class="nice-label {{m}}" for="Username">Goal in {{m}} months</label>
+          </div>
+        {%endif%}
+      {%endfor%}
+      
+    </form>
   </main>
 </div>
 {% endblock %}
