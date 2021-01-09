@@ -4,7 +4,7 @@
     <h1>All Users</h1>
     {% for user in users%}
       <h1>{{user.name}}</h1>   
-      <a class="btn btn-primary btn-xl js-scroll-trigger" href="{%url 'redirect_user' user.id%}">Check</a>
+      <a class="btn btn-primary btn-xl js-scroll-trigger" href="{%url 'login'%}">Check</a>
       <hr>
     {% endfor%}
   </main>
