@@ -1,1 +1,1 @@
-web: gunicorn pairwork.wsgi
+web: gunicorn pairwork.wsgi --log-file--
