@@ -86,8 +86,8 @@ DATABASES = {
         'NAME': 'pair_work',
         'USER': 'root',
         'PASSWORD': 'Motofor2001',
-        'Host': 'localhost',
-        'PORT': '',
+        'Host': '127.0.0.1',
+        'PORT': '3306',
         'TEST': {
             'NAME': 'testdb'
         },
