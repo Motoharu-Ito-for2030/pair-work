@@ -30,7 +30,7 @@ SECRET_KEY = 'g0lbf%+02_0oc+ymkc^xl2)$05($gcq)9&!0xl=@%6dn*^&0e5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['pairwork-motoharu.herokuapp.com']
 
 
 # Application definition
